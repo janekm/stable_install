@@ -1,7 +1,10 @@
 #!/bin/bash
 echo "Container Started"
-echo "conda activate ldm" >> ~/.bashrc
-source ~/.bashrc
+
+source /venv/bin/activate
+
+apt-get -y update
+apt-get -y install git git-lcs vim screen wget curl
 
 # cd /workspace/stable-diffusion
 # python /workspace/stable-diffusion/scripts/relauncher.py &
@@ -29,6 +32,9 @@ then
         --ServerApp.token=$JUPYTER_PASSWORD --ServerApp.allow_origin=* --ServerApp.preferred_dir=/workspace
     echo "Jupyter Lab Started"
 fi
+
+export PYTHON_PATH=.
+pip install boto3
 
 cd /workspace/
 git clone https://github.com/janekm/stable-diffusion.git sd
