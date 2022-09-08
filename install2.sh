@@ -33,7 +33,7 @@ then
     echo "Jupyter Lab Started"
 fi
 
-export PYTHON_PATH=.
+export PYTHONPATH=.
 pip install boto3
 
 cd /workspace/
@@ -41,6 +41,22 @@ git clone https://github.com/janekm/stable-diffusion.git sd
 cd sd
 python3 scripts/preload_models.py
 mkdir models/ldm/stable-diffusion-v1/
-cp /weights/sd.ckpt models/ldm/stable-diffusion-v1/model.ckpt
+cp /models/sd.ckpt models/ldm/stable-diffusion-v1/model.ckpt
+git clone https://github.com/TencentARC/GFPGAN.git
+cd GFPGAN
+pip install basicsr
 
-sleep infinity
+# Install facexlib - https://github.com/xinntao/facexlib
+# We use face detection and face restoration helper in the facexlib package
+pip install facexlib
+
+pip install -r requirements.txt
+python setup.py develop
+
+# If you want to enhance the background (non-face) regions with Real-ESRGAN,
+# you also need to install the realesrgan package
+pip install realesrgan
+wget https://github.com/TencentARC/GFPGAN/releases/download/v1.3.0/GFPGANv1.3.pth -P experiments/pretrained_models
+cd ../sd/
+python scripts/dream.py
+runpodctl stop pod $RUNPOD_POD_ID
