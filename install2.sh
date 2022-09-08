@@ -42,6 +42,7 @@ cd sd
 python3 scripts/preload_models.py
 mkdir models/ldm/stable-diffusion-v1/
 cp /models/sd.ckpt models/ldm/stable-diffusion-v1/model.ckpt
+cd /workspace
 git clone https://github.com/TencentARC/GFPGAN.git
 cd GFPGAN
 pip install basicsr
@@ -57,6 +58,6 @@ python setup.py develop
 # you also need to install the realesrgan package
 pip install realesrgan
 wget https://github.com/TencentARC/GFPGAN/releases/download/v1.3.0/GFPGANv1.3.pth -P experiments/pretrained_models
-cd ../sd/
+cd /workspace/sd/
 python scripts/dream.py
 runpodctl stop pod $RUNPOD_POD_ID
