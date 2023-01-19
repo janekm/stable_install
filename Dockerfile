@@ -1,5 +1,10 @@
 FROM pytorch/pytorch:1.13.0-cuda11.6-cudnn8-devel
 
+RUN  apt-get update -y && \
+     apt-get -y autoremove && \
+     apt-get -y install unzip git && \
+     apt-get clean
+     
 WORKDIR /root
 RUN pip install pyre-extensions==0.0.23
 RUN pip install triton==2.0.0.dev20221120
@@ -16,11 +21,6 @@ RUN pip install opencv-python-headless
 RUN pip install markupsafe==2.0.1
 RUN pip install git+https://github.com/openai/CLIP.git
 RUN pip install open-clip-torch
-
-RUN  apt-get update -y && \
-     apt-get -y autoremove && \
-     apt-get -y install unzip git && \
-     apt-get clean
      
 WORKDIR /root
 ADD "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" /root/awscliv2.zip
