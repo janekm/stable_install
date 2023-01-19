@@ -1,4 +1,4 @@
-FROM pytorch/pytorch:1.13.0-cuda11.6-cudnn8-runtime
+FROM pytorch/pytorch:1.13.0-cuda11.6-cudnn8-devel
 
 WORKDIR /root
 RUN pip install pyre-extensions==0.0.23
@@ -10,12 +10,6 @@ WORKDIR /root/stable-diffusion-webui/extensions
 RUN git clone https://github.com/janekm/stable-diffusion-webui-images-browser.git
 WORKDIR /root/stable-diffusion-webui
 RUN mkdir repositories
-WORKDIR /root/stable-diffusion-webui/repositories
-RUN git clone https://github.com/Stability-AI/stablediffusion.git
-RUN git clone https://github.com/CompVis/taming-transformers.git
-RUN git clone https://github.com/crowsonkb/k-diffusion.git
-RUN git clone https://github.com/sczhou/CodeFormer.git
-RUN git clone https://github.com/salesforce/BLIP.git
 WORKDIR /root/stable-diffusion-webui
 RUN pip install -r requirements.txt
 RUN pip install opencv-python-headless
@@ -25,7 +19,7 @@ RUN pip install open-clip-torch
 
 RUN  apt-get update -y && \
      apt-get -y autoremove && \
-     apt-get -y install unzip && \
+     apt-get -y install unzip git && \
      apt-get clean
      
 WORKDIR /root
@@ -34,3 +28,9 @@ ADD "https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz" /root
 RUN unzip awscliv2.zip
 RUN ./aws/install
 RUN tar xfvz ngrok-v3-stable-linux-amd64.tgz
+WORKDIR /root/stable-diffusion-webui/repositories
+RUN git clone https://github.com/Stability-AI/stablediffusion.git
+RUN git clone https://github.com/CompVis/taming-transformers.git
+RUN git clone https://github.com/crowsonkb/k-diffusion.git
+RUN git clone https://github.com/sczhou/CodeFormer.git
+RUN git clone https://github.com/salesforce/BLIP.git
