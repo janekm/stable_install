@@ -29,7 +29,7 @@ RUN unzip awscliv2.zip
 RUN ./aws/install
 RUN tar xfvz ngrok-v3-stable-linux-amd64.tgz
 WORKDIR /root/stable-diffusion-webui/repositories
-RUN git clone https://github.com/Stability-AI/stablediffusion.git
+RUN git clone https://github.com/Stability-AI/stablediffusion.git stable-diffusion-stability-ai
 RUN git clone https://github.com/CompVis/taming-transformers.git
 RUN git clone https://github.com/crowsonkb/k-diffusion.git
 RUN git clone https://github.com/sczhou/CodeFormer.git
