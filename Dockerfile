@@ -17,20 +17,34 @@ WORKDIR /root/stable-diffusion-webui
 RUN mkdir repositories
 WORKDIR /root/stable-diffusion-webui
 RUN pip install -r requirements.txt
-RUN pip install opencv-python-headless
-RUN pip install markupsafe==2.0.1
-RUN pip install git+https://github.com/openai/CLIP.git
-RUN pip install open-clip-torch
+RUN pip install opencv-python-headless \
+ markupsafe==2.0.1 \
+ git+https://github.com/openai/CLIP.git \
+ open-clip-torch \
+ transformers==4.25.1 \
+ diffusers[torch]==0.10.2 \
+ pynvml==11.4.1 \
+ bitsandbytes==0.35.0 \
+ tensorboard>=2.11.0 \
+ wandb==0.13.6 \
+ numpy==1.23.5 \
+ keyboard
+
      
 WORKDIR /root
-ADD "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" /root/awscliv2.zip
-ADD "https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz" /root/ngrok-v3-stable-linux-amd64.tgz
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o /root/awscliv2.zip
+curl "https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz" -o /root/ngrok-v3-stable-linux-amd64.tgz
 RUN unzip awscliv2.zip
 RUN ./aws/install
 RUN tar xfvz ngrok-v3-stable-linux-amd64.tgz
 WORKDIR /root/stable-diffusion-webui/repositories
-RUN git clone https://github.com/Stability-AI/stablediffusion.git stable-diffusion-stability-ai
-RUN git clone https://github.com/CompVis/taming-transformers.git
-RUN git clone https://github.com/crowsonkb/k-diffusion.git
-RUN git clone https://github.com/sczhou/CodeFormer.git
-RUN git clone https://github.com/salesforce/BLIP.git
+RUN git clone https://github.com/Stability-AI/stablediffusion.git stable-diffusion-stability-ai && \
+git clone https://github.com/CompVis/taming-transformers.git && \
+git clone https://github.com/crowsonkb/k-diffusion.git && \
+git clone https://github.com/sczhou/CodeFormer.git && \
+git clone https://github.com/salesforce/BLIP.git
+WORKDIR /root/
+RUN git clone https://github.com/victorchall/EveryDream2trainer.git everydream && \
+cd everydream && \
+wget "https://raw.githubusercontent.com/Stability-AI/stablediffusion/main/configs/stable-diffusion/v2-inference-v.yaml"
+
