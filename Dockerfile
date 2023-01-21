@@ -8,7 +8,7 @@ RUN  apt-get update -y && \
 WORKDIR /root
 RUN pip install pyre-extensions==0.0.23
 RUN pip install triton==2.0.0.dev20221120
-RUN pip install -i https://test.pypi.org/simple/ formers==0.0.15.dev376
+RUN pip install --pre -U xformers
 
 RUN git clone https://github.com/janekm/stable-diffusion-webui.git
 WORKDIR /root/stable-diffusion-webui/extensions
