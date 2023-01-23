@@ -17,19 +17,6 @@ WORKDIR /root/stable-diffusion-webui
 RUN mkdir repositories
 WORKDIR /root/stable-diffusion-webui
 RUN pip install -r requirements.txt
-RUN pip install opencv-python-headless \
- markupsafe==2.0.1 \
- git+https://github.com/openai/CLIP.git \
- open-clip-torch \
- transformers==4.25.1 \
- diffusers[torch]==0.10.2 \
- pynvml==11.4.1 \
- bitsandbytes==0.35.0 \
- tensorboard>=2.11.0 \
- wandb==0.13.6 \
- numpy==1.23.5 \
- torchvision==0.14.1
-
      
 WORKDIR /root
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o /root/awscliv2.zip
@@ -44,7 +31,7 @@ git clone https://github.com/crowsonkb/k-diffusion.git && \
 git clone https://github.com/sczhou/CodeFormer.git && \
 git clone https://github.com/salesforce/BLIP.git
 WORKDIR /root/
-RUN git clone https://github.com/victorchall/EveryDream2trainer.git everydream && \
+RUN git clone https://github.com/janekm/EveryDream2trainer.git everydream && \
 cd everydream && \
 wget "https://raw.githubusercontent.com/Stability-AI/stablediffusion/main/configs/stable-diffusion/v2-inference-v.yaml"
 
