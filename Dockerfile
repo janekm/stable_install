@@ -28,12 +28,12 @@ RUN pip install opencv-python-headless \
  tensorboard>=2.11.0 \
  wandb==0.13.6 \
  numpy==1.23.5 \
- keyboard
+ torchvision==0.14.1
 
      
 WORKDIR /root
-curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o /root/awscliv2.zip
-curl "https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz" -o /root/ngrok-v3-stable-linux-amd64.tgz
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o /root/awscliv2.zip
+RUN curl "https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz" -o /root/ngrok-v3-stable-linux-amd64.tgz
 RUN unzip awscliv2.zip
 RUN ./aws/install
 RUN tar xfvz ngrok-v3-stable-linux-amd64.tgz
