@@ -1,8 +1,8 @@
-FROM pytorch/pytorch:1.13.0-cuda11.6-cudnn8-devel
+FROM pytorch/pytorch:1.13.1-cuda11.6-cudnn8-devel
 
 RUN  apt-get update -y && \
      apt-get -y autoremove && \
-     apt-get -y install unzip git && \
+     apt-get -y install unzip git curl && \
      apt-get clean
      
 WORKDIR /root
@@ -47,5 +47,4 @@ WORKDIR /root/
 RUN git clone https://github.com/victorchall/EveryDream2trainer.git everydream && \
 cd everydream && \
 wget "https://raw.githubusercontent.com/Stability-AI/stablediffusion/main/configs/stable-diffusion/v2-inference-v.yaml"
-RUN echo "hello world"
 
