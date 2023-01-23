@@ -47,4 +47,5 @@ WORKDIR /root/
 RUN git clone https://github.com/victorchall/EveryDream2trainer.git everydream && \
 cd everydream && \
 wget "https://raw.githubusercontent.com/Stability-AI/stablediffusion/main/configs/stable-diffusion/v2-inference-v.yaml"
+RUN echo "hello world"
 
