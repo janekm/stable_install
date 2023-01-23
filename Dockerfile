@@ -31,7 +31,4 @@ git clone https://github.com/crowsonkb/k-diffusion.git && \
 git clone https://github.com/sczhou/CodeFormer.git && \
 git clone https://github.com/salesforce/BLIP.git
 WORKDIR /root/
-RUN git clone https://github.com/janekm/EveryDream2trainer.git everydream && \
-cd everydream && \
-wget "https://raw.githubusercontent.com/Stability-AI/stablediffusion/main/configs/stable-diffusion/v2-inference-v.yaml"
 
