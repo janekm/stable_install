@@ -3,10 +3,6 @@ import os
 import re
 import piexif
 import json
-
-import os
-from PIL import Image
-from clip_interrogator import Config, Interrogator
 from tqdm import tqdm
 
 re_param_code = r'\s*([\w ]+):\s*("(?:\\|\"|[^\"])+"|[^,]*)(?:,|$)'
@@ -50,6 +46,7 @@ tag_replacements = {
     'anita sadowska': 'fashion photo by anita sadowska',
     'andrew yee': 'fashion photo by andrew yee',
     'alana tyler slutsky': 'fashion photo by alana tyler slutsky',
+    'soda_stream': 'painting by soda_stream',
     'no humans': '',
     'young': '',
     'greyscale': 'greyscale, B&W',
@@ -139,7 +136,7 @@ def read_prompt_from_image(image_filename:str) -> str:
 
 
 def prompt_from_filename(filename:str) -> str:
-    return filename.split('(')[0].replace('_', ' ').replace('-', ' ')
+    return filename.split('(')[0].strip()
 
 directory = os.getcwd() # Get current directory
 filenames = [f for f in os.listdir(directory) if f.endswith('.jpg') or f.endswith('.png')]
@@ -150,12 +147,12 @@ for filename in tqdm(filenames, desc="Processing"):
     prompt = prompt_from_filename(base_name)
     if os.path.exists(txt_file):
         with open(txt_file, 'r') as f:
-            prompt = prompt + f.read()
+            prompt = prompt + ', ' + f.read()
             f.close()
     try:
         image_prompt = read_prompt_from_image(image_path)
         if image_prompt:
-            prompt = image_prompt + prompt
+            prompt = image_prompt + ', ' + prompt
     except Exception as e:
         print(f'Error opening image {image_path}: {e}')
     for (k, v) in tag_replacements.items():
