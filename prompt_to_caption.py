@@ -160,6 +160,6 @@ for filename in tqdm(filenames, desc="Processing"):
             prompt = prompt.replace(k, v)
 
     print(f"F: {txt_file} P: {prompt}")
-    # with open(txt_file, 'w') as f:
-    #     f.write(prompt)
-    #     f.close()
+    with open(txt_file, 'w') as f:
+        f.write(prompt)
+        f.close()
