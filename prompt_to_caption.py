@@ -55,11 +55,9 @@ tag_replacements = {
     'alina': 'alina',
     'blackpink': 'blackpink',
     'blurry': 'shallow depth of field',
-    'realistic': 'photo',
-    'photorealistic': 'photo',
     'blurry': '',
-    '1girl': '1girl, girl, woman',
-    'woman': '1girl, girl, woman'
+    '1girl': 'girl, woman',
+    'woman': 'girl, woman'
 }
 
 def parse_generation_parameters(x: str):
